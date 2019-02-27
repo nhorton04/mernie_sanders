@@ -78,6 +78,12 @@ router.post(
             return res
               .status(400)
               .json({ alreadyliked: "User already liked this post" });
+          } else if (
+            post.dislikes.filter(
+              dislike => dislike.user.toString() === req.user.id
+            ).length > 0
+          ) {
+            post.dislikes.pop({ user: req.user.id });
           }
 
           post.likes.unshift({ user: req.user.id });
@@ -103,6 +109,11 @@ router.post(
             return res
               .status(400)
               .json({ alreadydisliked: "User already disliked this post" });
+          } else if (
+            post.likes.filter(like => like.user.toString() === req.user.id)
+              .length > 0
+          ) {
+            post.likes.pop({ user: req.user.id });
           }
 
           post.dislikes.unshift({ user: req.user.id });
@@ -167,6 +178,31 @@ router.post(
         })
         .catch(err => res.status(404).json({ postnotfound: "Post not found" }));
     });
+  }
+);
+
+router.post(
+  "/comment/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validatePostInput(req.body);
+
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+    Post.findById(req.params.id)
+      .then(post => {
+        const newComment = {
+          text: req.body.text,
+          name: req.body.name,
+          avatar: req.body.avatar,
+          user: req.user.id
+        };
+
+        post.comments.unshift(newComment);
+        post.save().then(post => res.json(post));
+      })
+      .catch(err => res.status(404).json({ postnotfound: "No post found" }));
   }
 );
 
