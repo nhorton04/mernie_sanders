@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import GoogleAuth from "../auth/GoogleAuth";
 
 class Navbar extends Component {
   render() {
@@ -38,6 +39,9 @@ class Navbar extends Component {
                 <Link className="nav-link" to="/login">
                   Login
                 </Link>
+              </li>
+              <li>
+                <GoogleAuth />
               </li>
             </ul>
           </div>
