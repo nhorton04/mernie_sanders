@@ -28,6 +28,8 @@ class Dashboard extends Component {
               Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
             </p>
             <ProfileActions />
+            {/* TODO: exp n' edu */}
+            <div style={{ marginBottom: "60px" }} />
           </div>
         );
       } else {
