@@ -47,7 +47,6 @@ class AddEducation extends Component {
 
     this.props.addEducation(eduData, this.props.history);
   }
-
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -67,11 +66,11 @@ class AddEducation extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <Link to="/dashboard" className="btn btn-light">
-                Go Back
+                Back
               </Link>
               <h1 className="display-4 text-center">Add Education</h1>
               <p className="lead text-center">
-                Add any skewl, boot camp, etc you've soaked in knowledge 4rm.
+                Please fill out required fields.
               </p>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
@@ -109,7 +108,7 @@ class AddEducation extends Component {
                   name="to"
                   type="date"
                   value={this.state.to}
-                  errpr={errors.to}
+                  error={errors.to}
                   onChange={this.onChange}
                   disabled={this.state.disabled ? "disabled" : ""}
                 />
@@ -124,7 +123,7 @@ class AddEducation extends Component {
                     id="current"
                   />
                   <label htmlFor="current" className="form-check-label">
-                    Current Sk00l
+                    Current School
                   </label>
                 </div>
                 <TextAreaFieldGroup
@@ -133,7 +132,7 @@ class AddEducation extends Component {
                   value={this.state.description}
                   onChange={this.onChange}
                   error={errors.description}
-                  info="Tell us about the 'gram"
+                  info="Briefly describe the program"
                 />
                 <input
                   type="submit"
