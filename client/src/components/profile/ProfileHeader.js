@@ -25,9 +25,7 @@ class ProfileHeader extends Component {
                 )}
               </p>
 
-              {isEmpty(profile.location) ? null : (
-                <p>{profile.location}, Earth</p>
-              )}
+              {isEmpty(profile.location) ? null : <p>{profile.location}</p>}
 
               <p>
                 {isEmpty(profile.website) ? null : (
@@ -47,7 +45,7 @@ class ProfileHeader extends Component {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <i className="fas fa-twitter fa-2x" />
+                    <i className="fab fa-twitter fa-2x" />
                   </a>
                 )}
                 {isEmpty(profile.social && profile.social.facebook) ? null : (
@@ -57,7 +55,7 @@ class ProfileHeader extends Component {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <i className="fas fa-facebook fa-2x" />
+                    <i className="fab fa-facebook fa-2x" />
                   </a>
                 )}
                 {isEmpty(profile.social && profile.social.instagram) ? null : (
@@ -67,7 +65,7 @@ class ProfileHeader extends Component {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <i className="fas fa-instagram fa-2x" />
+                    <i className="fab fa-instagram fa-2x" />
                   </a>
                 )}
                 {isEmpty(profile.social && profile.social.linkedin) ? null : (
@@ -77,7 +75,17 @@ class ProfileHeader extends Component {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <i className="fas fa-linkedin fa-2x" />
+                    <i className="fab fa-linkedin fa-2x" />
+                  </a>
+                )}
+                {isEmpty(profile.social && profile.social.youtube) ? null : (
+                  <a
+                    className="text-white p-2"
+                    href={profile.social.youtube}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fab fa-youtube fa-2x" />
                   </a>
                 )}
               </p>
