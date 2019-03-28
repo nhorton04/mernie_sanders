@@ -1,34 +1,43 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { getGithub } from "../../utils/api";
 
 class ProfileGithub extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      clientId: "57233191007fe35c74be",
-      clientSecret: "2dafd57d1aa8215cbf3d045de75f5e47b8dca14c",
-      count: 5,
-      sort: "created: asc",
       repos: []
     };
   }
+  // this.state = {
+  //   clientId: "57233191007fe35c74be",
+  //   clientSecret: "2dafd57d1aa8215cbf3d045de75f5e47b8dca14c",
+  //   count: 5,
+  //   sort: "created: asc",
 
-  componentDidMount() {
+  async componentDidMount() {
     const { username } = this.props;
-    const { count, sort, clientId, clientSecret } = this.state;
 
-    fetch(
-      `https://api.github.com/users/${username}/repos?per_page=${count}&sort=${sort}&client_id=${clientId}*client_secret=${clientSecret}`
-    )
-      .then(res => res.json())
-      .then(data => {
-        if (this.refs.myRef) {
-          this.setState({ repos: data });
-        }
-      })
-      .catch(err => console.log(err));
+    const data = await getGithub(username);
+    this.setState({
+      repos: data
+    });
   }
+
+  // const { count, sort, clientId, clientSecret } = this.state;
+
+  //   fetch(
+  //     `https://api.github.com/users/${username}/repos?per_page=${count}&sort=${sort}&client_id=${clientId}*client_secret=${clientSecret}`
+  //   )
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       if (this.refs.myRef) {
+  //         this.setState({ repos: data });
+  //       }
+  //     })
+  //     .catch(err => console.log(err));
+  // }
 
   render() {
     const { repos } = this.state;
